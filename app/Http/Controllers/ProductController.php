@@ -9,7 +9,14 @@ class ProductController extends Controller
 {
     public function index()
     {
-        return response()->json(Product::all());
+        $products = Product::all();
+
+        return view('admin.products.index', compact('products'));
+    }
+
+    public function create()
+    {
+        return view('admin.products.create');
     }
 
     public function store(Request $request)
@@ -20,10 +27,16 @@ class ProductController extends Controller
             'stock' => 'required|integer',
         ]);
 
-        return response()->json(
-            Product::create($data),
-            201
-        );
+        Product::create($data);
+
+        return redirect('/admin/products');
+    }
+
+    public function edit($id)
+    {
+        $product = Product::findOrFail($id);
+
+        return view('admin.products.edit', compact('product'));
     }
 
     public function update(Request $request, $id)
@@ -37,15 +50,13 @@ class ProductController extends Controller
         $product = Product::findOrFail($id);
         $product->update($data);
 
-        return response()->json($product);
+        return redirect('/admin/products');
     }
 
     public function destroy($id)
     {
         Product::findOrFail($id)->delete();
 
-        return response()->json([
-            'message' => 'Product deleted'
-        ]);
+        return redirect('/admin/products');
     }
 }

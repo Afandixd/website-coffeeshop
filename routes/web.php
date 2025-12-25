@@ -17,16 +17,20 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::post('/orders', [OrderController::class, 'store']);
 });
 
 Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::get('/products', [ProductController::class, 'index']);
+    Route::get('/products/create', [ProductController::class, 'create']);
     Route::post('/products', [ProductController::class, 'store']);
+    Route::get('/products/{id}/edit', [ProductController::class, 'edit']);
     Route::put('/products/{id}', [ProductController::class, 'update']);
     Route::delete('/products/{id}', [ProductController::class, 'destroy']);
 
     Route::get('/orders', [OrderController::class, 'index']);
     Route::put('/orders/{id}', [OrderController::class, 'update']);
 });
+
 
 require __DIR__.'/auth.php';
