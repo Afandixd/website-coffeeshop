@@ -12,3 +12,4 @@ Route::delete('/products/{id}', [ProductController::class, 'destroy']);
 Route::get('/orders', [OrderController::class, 'index']);
 Route::post('/orders', [OrderController::class, 'store']);
 Route::patch('/orders/{id}', [OrderController::class, 'update']);
+// Route::patch('/orders/{id}', [OrderController::class, 'update']);
