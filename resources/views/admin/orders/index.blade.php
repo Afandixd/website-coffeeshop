@@ -1,12 +1,19 @@
-<h1>Daftar Order</h1>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Daftar Order</title>
+</head>
+<body>
 
-<table border="1">
+<h2>Daftar Order</h2>
+
+<table border="1" cellpadding="10">
     <tr>
         <th>ID</th>
         <th>User</th>
         <th>Status</th>
         <th>Total</th>
-        <th>Aksi</th>
+        <th>Detail</th>
     </tr>
 
     @foreach ($orders as $order)
@@ -16,8 +23,18 @@
         <td>{{ $order->status }}</td>
         <td>{{ $order->total_price }}</td>
         <td>
-            <a href="/admin/orders/{{ $order->id }}">Detail</a>
+            <ul>
+                @foreach ($order->orderItems as $item)
+                    <li>
+                        {{ $item->product->name }} x {{ $item->quantity }}
+                    </li>
+                @endforeach
+            </ul>
         </td>
     </tr>
     @endforeach
+
 </table>
+
+</body>
+</html>
