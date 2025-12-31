@@ -14,6 +14,7 @@
         <th>Status</th>
         <th>Total</th>
         <th>Detail</th>
+        <th>Aksi</th>
     </tr>
 
     @foreach ($orders as $order)
@@ -30,6 +31,20 @@
                     </li>
                 @endforeach
             </ul>
+        </td>
+        <td>
+            <form action="/admin/orders/{{ $order->id }}" method="POST">
+                @csrf
+                @method('PUT')
+
+                <select name="status">
+                    <option value="pending" {{ $order->status == 'pending' ? 'selected' : '' }}>pending</option>
+                    <option value="paid" {{ $order->status == 'paid' ? 'selected' : '' }}>paid</option>
+                    <option value="done" {{ $order->status == 'done' ? 'selected' : '' }}>done</option>
+                </select>
+
+                <button type="submit">Update</button>
+            </form>
         </td>
     </tr>
     @endforeach

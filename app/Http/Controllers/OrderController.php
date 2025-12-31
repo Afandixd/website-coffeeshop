@@ -27,15 +27,17 @@ public function show($id)
 public function update(Request $request, $id)
 {
     $data = $request->validate([
-        'status' => 'required|string',
+        'status' => 'required|in:pending,paid,done',
     ]);
 
     $order = Order::findOrFail($id);
-    $order->update($data);
-
+    $order->update([
+        'status' => $data['status'],
+    ]);
 
     return redirect('/admin/orders');
 }
+
 
 public function checkout()
 {
