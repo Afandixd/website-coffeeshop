@@ -7,10 +7,10 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
+    // ✅ Admin: kelola produk
     public function index()
     {
         $products = Product::all();
-
         return view('admin.products.index', compact('products'));
     }
 
@@ -35,7 +35,6 @@ class ProductController extends Controller
     public function edit($id)
     {
         $product = Product::findOrFail($id);
-
         return view('admin.products.edit', compact('product'));
     }
 
@@ -56,7 +55,13 @@ class ProductController extends Controller
     public function destroy($id)
     {
         Product::findOrFail($id)->delete();
-
         return redirect('/admin/products');
+    }
+
+    // ✅ Customer: lihat produk
+    public function customerView()
+    {
+        $products = Product::all();
+        return view('customer.products', compact('products'));
     }
 }
