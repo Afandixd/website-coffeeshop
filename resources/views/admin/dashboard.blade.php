@@ -89,6 +89,9 @@
             <a href="/admin/orders" class="border-2 border-green-500 text-green-500 hover:bg-green-500 hover:text-white font-semibold py-3 px-6 rounded text-center transition">
                 Kelola Order
             </a>
+            <a href="{{ url('/admin/tables') }}" class="border-2 border-purple-500 text-purple-500 hover:bg-purple-500 hover:text-white font-semibold py-3 px-6 rounded text-center transition">
+    📋 Table Management
+</a>
         </div>
     </div>
 
