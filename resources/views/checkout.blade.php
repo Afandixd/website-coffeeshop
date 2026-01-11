@@ -1,3 +1,4 @@
+{{-- Tampilan Checkout --}}
 @extends('layouts.app')
 
 @section('content')
@@ -80,3 +81,5 @@
     </form>
 </div>
 @endsection
+
+
