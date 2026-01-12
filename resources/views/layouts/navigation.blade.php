@@ -9,7 +9,7 @@
                             <path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z"/>
                         </svg>
                     </div>
-                    <span class="text-2xl font-bold text-black">☕ CoffeeShop</span>
+                    <span class="text-2xl font-bold text-black">CoffeeShop Culture</span>
                 </a>
             </div>
 
@@ -20,19 +20,19 @@
                     @if(auth()->user()->role !== 'admin')
                         <a href="{{ url('/dashboard') }}"
                            class="text-black hover:bg-orange-700 px-4 py-2 rounded-lg transition {{ request()->is('dashboard') ? 'bg-orange-700' : '' }}">
-                            🏠 Home
+                            Home
                         </a>
                         <a href="{{ url('/products') }}"
                            class="text-black hover:bg-orange-700 px-4 py-2 rounded-lg transition {{ request()->is('products') ? 'bg-orange-700' : '' }}">
-                            ☕ Menu
+                            Menu
                         </a>
                         <a href="{{ url('/my-orders') }}"
                            class="text-black hover:bg-orange-700 px-4 py-2 rounded-lg transition {{ request()->is('my-orders') ? 'bg-orange-700' : '' }}">
-                            📦 My Orders
+
                         </a>
                         <a href="{{ url('/checkout') }}"
                            class="text-black hover:bg-orange-700 px-4 py-2 rounded-lg transition {{ request()->is('checkout') ? 'bg-orange-700' : '' }}">
-                            🛒 Checkout
+
                         </a>
                     @endif
 
@@ -40,15 +40,15 @@
                     @if(auth()->user()->role === 'admin')
                         <a href="{{ url('/admin/dashboard') }}"
                            class="text-black hover:bg-orange-700 px-4 py-2 rounded-lg transition {{ request()->is('admin/dashboard') ? 'bg-orange-700' : '' }}">
-                            📊 Dashboard
+                        Dashboard
                         </a>
                         <a href="{{ url('/admin/products') }}"
                            class="text-black hover:bg-orange-700 px-4 py-2 rounded-lg transition {{ request()->is('admin/products*') ? 'bg-orange-700' : '' }}">
-                            📦 Produk
+                        Produk
                         </a>
                         <a href="{{ url('/admin/orders') }}"
                            class="text-black hover:bg-orange-700 px-4 py-2 rounded-lg transition {{ request()->is('admin/orders*') ? 'bg-orange-700' : '' }}">
-                            📋 Orders
+
                         </a>
                     @endif
                 @endauth
@@ -74,12 +74,12 @@
                              class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-xl py-2 z-50"
                              style="display: none;">
                             <a href="{{ route('profile.edit') }}" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">
-                                👤 Profile
+
                             </a>
 
                             @if(auth()->user()->role === 'admin')
                                 <a href="{{ url('/products') }}" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">
-                                    🏪 View as Customer
+
                                 </a>
                             @endif
 
@@ -88,7 +88,7 @@
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
                                 <button type="submit" class="w-full text-left px-4 py-2 text-red-600 hover:bg-red-50">
-                                    🚪 Logout
+                                Logout
                                 </button>
                             </form>
                         </div>
@@ -114,14 +114,12 @@
         <div x-show="open" class="bg-orange-700 px-4 py-2 space-y-1" style="display: none;">
             @auth
                 @if(auth()->user()->role !== 'admin')
-                    <a href="{{ url('/dashboard') }}" class="block text-black py-2">🏠 Home</a>
-                    <a href="{{ url('/products') }}" class="block text-black py-2">☕ Menu</a>
-                    <a href="{{ url('/my-orders') }}" class="block text-black py-2">📦 My Orders</a>
-                    <a href="{{ url('/checkout') }}" class="block text-black py-2">🛒 Checkout</a>
+                    <a href="{{ url('/dashboard') }}" class="block text-black py-2">Home</a>
+                    <a href="{{ url('/products') }}" class="block text-black py-2">Menu</a>
+
                 @else
-                    <a href="{{ url('/admin/dashboard') }}" class="block text-black py-2">📊 Dashboard</a>
-                    <a href="{{ url('/admin/products') }}" class="block text-black py-2">📦 Produk</a>
-                    <a href="{{ url('/admin/orders') }}" class="block text-black py-2">📋 Orders</a>
+                    <a href="{{ url('/admin/dashboard') }}" class="block text-black py-2">Dashboard</a>
+                    <a href="{{ url('/admin/products') }}" class="block text-black py-2">Produk</a>
                 @endif
             @endauth
         </div>

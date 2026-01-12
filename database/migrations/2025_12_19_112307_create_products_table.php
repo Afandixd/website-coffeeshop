@@ -11,14 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('products', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');                // Nama produk
-            $table->integer('price');              // Harga produk
-            $table->integer('stock')->default(0);  // Stok produk, default 0 biar aman
-            $table->string('category')->nullable(); // Kategori (coffee, non-coffee, food)
-            $table->timestamps();                  // created_at & updated_at
-        });
+Schema::create('products', function (Blueprint $table) {
+    $table->id();
+    $table->string('name');
+    $table->enum('category', ['coffee', 'non_coffee', 'foods']);
+    $table->integer('price');
+    $table->integer('stock');
+    $table->string('image')->nullable();
+    $table->timestamps();
+});
+
     }
 
     /**

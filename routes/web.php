@@ -7,6 +7,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CheckoutController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,10 +39,13 @@ Route::middleware(['auth'])->group(function () {
     // Produk dan pemesanan
     Route::get('/products', [ProductController::class, 'customerView'])
         ->name('customer.products');
+    
 
+    Route::post('/cart/add', [CartController::class, 'add']);
+    Route::get('/checkout', [CheckoutController::class, 'index']);
 
-
-
+    //checkout
+    Route::get('/checkout', [CheckoutController::class, 'index'])->middleware('auth');
 
     // Thank you
     Route::get('/thank-you', function () {
@@ -79,9 +83,6 @@ Route::middleware(['auth', 'admin'])
         ->name('admin.profile.update');
 
     // Orders
-    Route::get('/orders', [OrderController::class, 'index']);
-    Route::get('/orders/{id}', [OrderController::class, 'show']);
-    Route::put('/orders/{id}', [OrderController::class, 'update']);
 
     // Meja
     Route::get('/tables', [AdminDashboardController::class, 'tables'])

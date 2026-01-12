@@ -6,7 +6,11 @@
                 @if($product->image)
                     <div class="mb-4">
                         <label class="block text-sm font-medium text-gray-700 mb-2">Gambar Saat Ini</label>
-                        <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="w-full h-48 object-cover rounded-lg">
+                        <img
+    src="{{ asset('storage/' . $product->image) }}"
+    class="w-40 h-40 object-contain rounded-lg mx-auto"
+>
+
                     </div>
                 @endif
 
@@ -36,8 +40,7 @@
     <div class="bg-white border-b shadow-sm">
         <div class="max-w-4xl mx-auto px-6 py-4 flex justify-between items-center">
             <div class="flex items-center gap-2">
-                <span class="text-green-600 text-2xl">☘️</span>
-                <h1 class="text-xl font-bold text-gray-800" style="font-family: cursive;">Coffee Shop</h1>
+                <h1 class="text-xl font-bold text-gray-800" style="font-family: cursive;">Coffee Shop Culture</h1>
             </div>
             <a href="{{ url('/admin/products') }}" class="text-green-600 hover:text-green-700">
                 ← Back to Products

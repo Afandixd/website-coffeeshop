@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tambah Produk - Coffee Shop</title>
+    <title>Tambah Produk - Coffee Shop Culture</title>
     @vite(['resources/css/app.css'])
 </head>
 <body class="bg-gray-50">
@@ -13,7 +13,7 @@
         <div class="max-w-4xl mx-auto px-6 py-4 flex justify-between items-center">
             <div class="flex items-center gap-2">
                 <span class="text-green-600 text-2xl">☘️</span>
-                <h1 class="text-xl font-bold text-gray-800" style="font-family: cursive;">Coffee Shop</h1>
+                <h1 class="text-xl font-bold text-gray-800" style="font-family: cursive;">Coffee Shop Culture</h1>
             </div>
             <a href="{{ url('/admin/products') }}" class="text-green-600 hover:text-green-700">
                 ← Back to Products

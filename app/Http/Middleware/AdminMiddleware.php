@@ -13,6 +13,6 @@ class AdminMiddleware
             return $next($request);
         }
 
-        abort(403, 'Akses hanya untuk admin.');
+        abort(403, 'Kamu bukan admin, gabisa yaa :) .');
     }
 }

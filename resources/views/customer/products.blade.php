@@ -1,356 +1,211 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Laman Utama - Coffee Shop</title>
-    <img src="{{ asset('storage/products/' . $product->image) }}" alt="{{ $product->name }}">
-    @vite(['resources/css/app.css'])
+    <title>Coffee Shop Culture</title>
+
     <style>
-        /* CSS Global */
         body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #000;
-            color: white;
-            position: relative;
+            margin:0;
+            background:#000;
+            color:white;
+            font-family:Arial;
         }
 
-        body::before {
-            content: "";
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #C8A882 0%, #8B6F47 100%);
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            filter: blur(5px) brightness(1.2);
-            z-index: -1;
-        }
-
-        /* Header */
         header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background-color: rgba(207, 180, 26, 0.9);
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 10px 20px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-            z-index: 1000;
+            position:fixed;
+            top:0;
+            width:100%;
+            background:#c79e2d;
+            padding:15px;
+            text-align:center;
+            font-size:22px;
+            z-index:1000;
         }
 
-        .logo {
-            height: 40px;
-            width: 40px;
-        }
+.section {
+    margin:100px auto 30px;
+    max-width:1200px;
+    padding:0 20px;
+}
 
-        .header-title {
-            flex: 1;
-            text-align: center;
-            font-size: 24px;
-            font-weight: bold;
-        }
-
-        header a {
-            color: white;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        /* Search Bar */
-        .search-bar {
-            margin: 100px auto 20px;
-            text-align: center;
-        }
-
-        .search-bar input {
-            width: 70%;
-            padding: 10px;
-            font-size: 16px;
-            border: 1px solid #ccc;
-            border-radius: 5px 0 0 5px;
-            outline: none;
-        }
-
-        .search-bar button {
-            padding: 10px 15px;
-            font-size: 16px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 0 5px 5px 0;
-            cursor: pointer;
-        }
-
-        /* Section */
-        .section {
-            margin: 30px 20px;
-        }
 
         .section h2 {
-            font-size: 28px;
-            margin-bottom: 15px;
+            text-align:center;
+            margin-bottom:15px;
         }
 
-        .catalog-container {
-            display: flex;
-            overflow-x: auto;
-            gap: 20px;
-            padding-bottom: 10px;
-        }
+.catalog {
+    display:flex;
+    gap:20px;
+    overflow-x:auto;
+    justify-content:flex-start;
+    padding:10px 10px 20px;
+}
+.catalog::-webkit-scrollbar {
+    height:8px;
+}
+
+.catalog::-webkit-scrollbar-thumb {
+    background:#c79e2d;
+    border-radius:10px;
+}
+
+.catalog::-webkit-scrollbar-track {
+    background:#222;
+}
+
 
         .menu-item {
-            flex: 0 0 auto;
-            width: 200px;
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            padding: 10px;
-            text-align: center;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
+            width:200px;
+            background:#111;
+            padding:10px;
+            border-radius:10px;
+            text-align:center;
+            flex-shrink:0;
         }
 
         .menu-item img {
-            width: 100%;
-            height: 120px;
-            border-radius: 10px;
-            object-fit: cover;
-        }
-
-        .name {
-            font-weight: bold;
-            margin: 10px 0;
-            color: #e9e520;
-        }
-
-        .price {
-            color: #ffffff;
-            margin-bottom: 10px;
-            font-weight: bold;
+            width:100%;
+            height:150px;
+            object-fit:cover;
+            border-radius:10px;
         }
 
         .btn {
-            padding: 8px 15px;
-            background-color: #c79e2d;
-            color: #ffffff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 14px;
+            background:#c79e2d;
+            border:none;
+            padding:8px 15px;
+            color:white;
+            border-radius:5px;
+            cursor:pointer;
         }
 
-        .btn:hover {
-            background-color: #a8831f;
+        .modal-bg {
+            position:fixed;
+            top:0;
+            left:0;
+            width:100%;
+            height:100%;
+            background:rgba(0,0,0,.7);
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            z-index:2000;
         }
 
-        .btn-order {
-            position: fixed;
-            bottom: 40px;
-            right: 40px;
-            background-color: #28a745;
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            border-radius: 50px;
-            font-size: 18px;
-            font-weight: bold;
-            cursor: pointer;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-            z-index: 1050;
-        }
-
-        .btn-order:hover {
-            background-color: #218838;
-        }
-
-        /* Footer */
-        footer {
-            background-color: #ffffff;
-            color: #333;
-            padding: 20px 0;
-            text-align: center;
-            margin-top: 50px;
-        }
-
-        .footer-links a {
-            color: #000;
-            text-decoration: none;
-            margin: 0 15px;
-        }
-
-        .footer-links a:hover {
-            text-decoration: underline;
-        }
-
-        /* Success Alert */
-        .alert-success {
-            position: fixed;
-            top: 80px;
-            right: 20px;
-            background-color: #4CAF50;
-            color: white;
-            padding: 15px 20px;
-            border-radius: 5px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-            z-index: 2000;
-            animation: slideIn 0.3s ease;
-        }
-
-        @keyframes slideIn {
-            from { transform: translateX(400px); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
+        .modal-box {
+            background:#111;
+            width:300px;
+            padding:20px;
+            border-radius:8px;
+            text-align:center;
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <div class="logo-container">
-            <svg class="logo" viewBox="0 0 100 100">
-                <circle cx="50" cy="50" r="45" fill="none" stroke="#ffffff" stroke-width="3"/>
-                <path d="M 30 60 Q 50 40 70 60" fill="none" stroke="#ffffff" stroke-width="3"/>
-                <circle cx="35" cy="45" r="3" fill="#ffffff"/>
-                <circle cx="65" cy="45" r="3" fill="#ffffff"/>
-            </svg>
-        </div>
-        <span class="header-title">Coffee Shop</span>
-        <div>
-            <a href="{{ url('/my-orders') }}">My Orders</a> |
-            <form method="POST" action="{{ route('logout') }}" style="display: inline;">
-                @csrf
-                <button type="submit" style="background: none; border: none; color: white; cursor: pointer; font-weight: bold;">Logout</button>
-            </form>
-        </div>
-    </header>
 
-    <!-- Success Message -->
-    @if(session('success'))
-        <div class="alert-success">
-            {{ session('success') }}
-        </div>
-        <script>
-            setTimeout(() => {
-                document.querySelector('.alert-success').style.display = 'none';
-            }, 3000);
-        </script>
-    @endif
+<header>Coffee Shop Culture</header>
 
-    <!-- Search Bar -->
-    <div class="search-bar">
-        <input type="text" id="searchInput" placeholder="Cari menu..." onkeyup="filterMenu()">
-        <button onclick="filterMenu()">Cari</button>
-    </div>
+<div class="section">
+<h2>Coffee</h2>
+<div class="catalog">
+@foreach($products->where('category','coffee') as $product)
+<div class="menu-item">
+<img src="{{ asset('storage/'.$product->image) }}">
+<p>{{ $product->name }}</p>
+<p>Rp {{ number_format($product->price,0,',','.') }}</p>
+<button class="btn" onclick="openModal({{ $product->id }}, '{{ $product->name }}')">Add</button>
+</div>
+@endforeach
+</div>
+</div>
 
-    <!-- Coffee Section -->
-    <div class="section">
-        <h2>Coffee</h2>
-        <div class="catalog-container">
-            @foreach($products->where('category', 'coffee') as $product)
-            <div class="menu-item" data-name="{{ strtolower($product->name) }}">
-                @if($product->image)
-                    <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}">
-                @else
-                    <img src="https://via.placeholder.com/200x120?text=Coffee" alt="{{ $product->name }}">
-                @endif
-                <p class="name">{{ $product->name }}</p>
-                <p class="price">Rp {{ number_format($product->price, 0, ',', '.') }}</p>
-                <form method="POST" action="{{ url('/cart/add') }}">
-                    @csrf
-                    <input type="hidden" name="product_id" value="{{ $product->id }}">
-                    <input type="hidden" name="quantity" value="1">
-                    <button type="submit" class="btn">Add</button>
-                </form>
-            </div>
-            @endforeach
-        </div>
-    </div>
+<div class="section">
+<h2>Non Coffee</h2>
+<div class="catalog">
+@foreach($products->where('category','non_coffee') as $product)
+<div class="menu-item">
+<img src="{{ asset('storage/'.$product->image) }}">
+<p>{{ $product->name }}</p>
+<p>Rp {{ number_format($product->price,0,',','.') }}</p>
+<button class="btn" onclick="openModal({{ $product->id }}, '{{ $product->name }}')">Add</button>
+</div>
+@endforeach
+</div>
+</div>
 
-    <!-- Non-Coffee Section -->
-    <div class="section">
-        <h2>Non-Coffee</h2>
-        <div class="catalog-container">
-            @foreach($products->where('category', 'non-coffee') as $product)
-            <div class="menu-item" data-name="{{ strtolower($product->name) }}">
-                @if($product->image)
-                    <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}">
-                @else
-                    <img src="https://via.placeholder.com/200x120?text=Drink" alt="{{ $product->name }}">
-                @endif
-                <p class="name">{{ $product->name }}</p>
-                <p class="price">Rp {{ number_format($product->price, 0, ',', '.') }}</p>
-                <form method="POST" action="{{ url('/cart/add') }}">
-                    @csrf
-                    <input type="hidden" name="product_id" value="{{ $product->id }}">
-                    <input type="hidden" name="quantity" value="1">
-                    <button type="submit" class="btn">Add</button>
-                </form>
-            </div>
-            @endforeach
-        </div>
-    </div>
+<div class="section">
+<h2>Foods</h2>
+<div class="catalog">
+@foreach($products->where('category','foods') as $product)
+<div class="menu-item">
+<img src="{{ asset('storage/'.$product->image) }}">
+<p>{{ $product->name }}</p>
+<p>Rp {{ number_format($product->price,0,',','.') }}</p>
+<button class="btn" onclick="openModal({{ $product->id }}, '{{ $product->name }}')">Add</button>
+</div>
+@endforeach
+</div>
+</div>
 
-    <!-- Food Section -->
-    <div class="section">
-        <h2>Food</h2>
-        <div class="catalog-container">
-            @foreach($products->where('category', 'food') as $product)
-            <div class="menu-item" data-name="{{ strtolower($product->name) }}">
-                @if($product->image)
-                    <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}">
-                @else
-                    <img src="https://via.placeholder.com/200x120?text=Food" alt="{{ $product->name }}">
-                @endif
-                <p class="name">{{ $product->name }}</p>
-                <p class="price">Rp {{ number_format($product->price, 0, ',', '.') }}</p>
-                <form method="POST" action="{{ url('/cart/add') }}">
-                    @csrf
-                    <input type="hidden" name="product_id" value="{{ $product->id }}">
-                    <input type="hidden" name="quantity" value="1">
-                    <button type="submit" class="btn">Add</button>
-                </form>
-            </div>
-            @endforeach
-        </div>
-    </div>
+<div id="customModal" class="modal-bg" style="display:none">
+<div class="modal-box">
+<h3 id="modalName"></h3>
 
-    <!-- Order Button -->
-    <a href="{{ url('/checkout') }}" class="btn-order">Pesan</a>
+<form id="addForm" method="POST" action="{{ url('/cart/add') }}">
+@csrf
+<input type="hidden" name="product_id" id="modalProductId">
 
-    <!-- Footer -->
-    <footer>
-        <div class="footer-content">
-            <p>&copy; 2025 Coffee Shop. All rights reserved.</p>
-            <div class="footer-links">
-                <a href="#">Privacy Policy</a>
-                <a href="#">Terms of Service</a>
-                <a href="#">Contact</a>
-            </div>
-        </div>
-    </footer>
+<label><input type="checkbox" name="hot"> Hot</label><br>
+<label><input type="checkbox" name="less_ice"> Less Ice</label><br>
+<label><input type="checkbox" name="double_shot"> Double Shot</label><br>
+<label><input type="checkbox" name="ice"> Ice</label><br><br>
 
-    <script>
-        function filterMenu() {
-            const input = document.getElementById('searchInput').value.toLowerCase();
-            const items = document.querySelectorAll('.menu-item');
+<button type="submit" class="btn">Tambah</button>
+<button type="button" class="btn" onclick="closeModal()">Batal</button>
+</form>
+</div>
+</div>
 
-            items.forEach(item => {
-                const name = item.getAttribute('data-name');
-                if (name.includes(input)) {
-                    item.style.display = 'block';
-                } else {
-                    item.style.display = 'none';
-                }
-            });
-        }
-    </script>
+<div id="successModal" class="modal-bg" style="display:none">
+<div class="modal-box">
+<p>Pesanan berhasil.<br>Orderan kamu akan segera diproses.</p><br>
+<button class="btn" onclick="closeSuccess()">Oke</button>
+</div>
+</div>
+
+<script>
+document.getElementById('addForm').addEventListener('submit', function(e){
+    e.preventDefault()
+
+    fetch(this.action, {
+        method: 'POST',
+        headers: {
+            'X-CSRF-TOKEN': document.querySelector('input[name=_token]').value
+        },
+        body: new FormData(this)
+    })
+    .then(res => res.json())
+    .then(() => {
+        closeModal()
+        document.getElementById('successModal').style.display = 'flex'
+    })
+})
+
+function openModal(id, name){
+    document.getElementById('modalProductId').value = id
+    document.getElementById('modalName').innerText = name
+    document.getElementById('customModal').style.display = 'flex'
+}
+
+function closeModal(){
+    document.getElementById('customModal').style.display = 'none'
+}
+
+function closeSuccess(){
+    document.getElementById('successModal').style.display = 'none'
+}
+</script>
+
 </body>
 </html>

@@ -11,9 +11,12 @@ class ProductController extends Controller
     // Customer view
 public function customerView()
 {
-    $products = Product::where('stock', '>', 0)->get();
+    $products = Product::where('stock','>',0)->get();
+
     return view('customer.products', compact('products'));
 }
+
+
 
     // Admin methods
     public function index()
